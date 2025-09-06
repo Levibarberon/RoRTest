@@ -1,7 +1,7 @@
 ﻿using RoR2;
 using System.Collections.Generic;
 
-namespace HenryMod.Modules.Characters
+namespace AE86Mod.Modules.Characters
 {
     public abstract class ItemDisplaysBase
     {

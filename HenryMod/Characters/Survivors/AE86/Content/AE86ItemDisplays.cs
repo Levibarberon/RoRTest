@@ -1,5 +1,5 @@
-﻿using HenryMod.Modules;
-using HenryMod.Modules.Characters;
+﻿using AE86Mod.Modules;
+using AE86Mod.Modules.Characters;
 using RoR2;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,9 +11,9 @@ using UnityEngine;
                     {localScale})
 */
 
-namespace HenryMod.Survivors.Henry
+namespace AE86Mod.Survivors.AE86
 {
-    public class HenryItemDisplays : ItemDisplaysBase
+    public class AE86ItemDisplays : ItemDisplaysBase
     {
         protected override void SetItemDisplayRules(List<ItemDisplayRuleSet.KeyAssetRuleGroup> itemDisplayRules)
         {

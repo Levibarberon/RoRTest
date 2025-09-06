@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace HenryMod.Survivors.Henry
+namespace AE86Mod.Survivors.AE86
 {
-    public static class HenryStaticValues
+    public static class AE86StaticValues
     {
         public const float swordDamageCoefficient = 2.8f;
 

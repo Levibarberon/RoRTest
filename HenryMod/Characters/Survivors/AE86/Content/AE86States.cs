@@ -1,8 +1,8 @@
-﻿using HenryMod.Survivors.Henry.SkillStates;
+﻿using AE86Mod.Survivors.AE86.SkillStates;
 
-namespace HenryMod.Survivors.Henry
+namespace AE86Mod.Survivors.AE86
 {
-    public static class HenryStates
+    public static class AE86States
     {
         public static void Init()
         {

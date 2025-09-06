@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace HenryMod.Modules
+namespace AE86Mod.Modules
 {
     internal static class ItemDisplayCheck
     {

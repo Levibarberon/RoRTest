@@ -1,32 +1,32 @@
 ﻿using BepInEx.Configuration;
-using HenryMod.Modules;
-using HenryMod.Modules.Characters;
-using HenryMod.Survivors.Henry.Components;
-using HenryMod.Survivors.Henry.SkillStates;
+using AE86Mod.Modules;
+using AE86Mod.Modules.Characters;
+using AE86Mod.Survivors.AE86.Components;
+using AE86Mod.Survivors.AE86.SkillStates;
 using RoR2;
 using RoR2.Skills;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HenryMod.Survivors.Henry
+namespace AE86Mod.Survivors.AE86
 {
-    public class HenrySurvivor : SurvivorBase<HenrySurvivor>
+    public class AE86Survivor : SurvivorBase<AE86Survivor>
     {
         //used to load the assetbundle for this character. must be unique
         public override string assetBundleName => "myassetbundle"; //if you do not change this, you are giving permission to deprecate the mod
 
         //the name of the prefab we will create. conventionally ending in "Body". must be unique
-        public override string bodyName => "HenryBody"; //if you do not change this, you get the point by now
+        public override string bodyName => "AE86Body"; //if you do not change this, you get the point by now
 
         //name of the ai master for vengeance and goobo. must be unique
-        public override string masterName => "HenryMonsterMaster"; //if you do not
+        public override string masterName => "AE86MonsterMaster"; //if you do not
 
         //the names of the prefabs you set up in unity that we will use to build your character
-        public override string modelPrefabName => "mdlHenry";
-        public override string displayPrefabName => "HenryDisplay";
+        public override string modelPrefabName => "mdlAE86";
+        public override string displayPrefabName => "AE86Display";
 
-        public const string HENRY_PREFIX = HenryPlugin.DEVELOPER_PREFIX + "_HENRY_";
+        public const string HENRY_PREFIX = AE86Plugin.DEVELOPER_PREFIX + "_HENRY_";
 
         //used when registering your survivor's language tokens
         public override string survivorTokenPrefix => HENRY_PREFIX;
@@ -37,7 +37,7 @@ namespace HenryMod.Survivors.Henry
             bodyNameToken = HENRY_PREFIX + "NAME",
             subtitleNameToken = HENRY_PREFIX + "SUBTITLE",
 
-            characterPortrait = assetBundle.LoadAsset<Texture>("texHenryIcon"),
+            characterPortrait = assetBundle.LoadAsset<Texture>("texAE86Icon"),
             bodyColor = Color.white,
             sortPosition = 100,
 
@@ -56,7 +56,7 @@ namespace HenryMod.Survivors.Henry
                 new CustomRendererInfo
                 {
                     childName = "SwordModel",
-                    material = assetBundle.LoadMaterial("matHenry"),
+                    material = assetBundle.LoadMaterial("matAE86"),
                 },
                 new CustomRendererInfo
                 {
@@ -68,9 +68,9 @@ namespace HenryMod.Survivors.Henry
                 }
         };
 
-        public override UnlockableDef characterUnlockableDef => HenryUnlockables.characterUnlockableDef;
+        public override UnlockableDef characterUnlockableDef => AE86Unlockables.characterUnlockableDef;
         
-        public override ItemDisplaysBase itemDisplays => new HenryItemDisplays();
+        public override ItemDisplaysBase itemDisplays => new AE86ItemDisplays();
 
         //set in base classes
         public override AssetBundle assetBundle { get; protected set; }
@@ -84,7 +84,7 @@ namespace HenryMod.Survivors.Henry
         public override void Initialize()
         {
             //uncomment if you have multiple characters
-            //ConfigEntry<bool> characterEnabled = Config.CharacterEnableConfig("Survivors", "Henry");
+            //ConfigEntry<bool> characterEnabled = Config.CharacterEnableConfig("Survivors", "AE86");
 
             //if (!characterEnabled.Value)
             //    return;
@@ -95,16 +95,16 @@ namespace HenryMod.Survivors.Henry
         public override void InitializeCharacter()
         {
             //need the character unlockable before you initialize the survivordef
-            HenryUnlockables.Init();
+            AE86Unlockables.Init();
 
             base.InitializeCharacter();
 
-            HenryConfig.Init();
-            HenryStates.Init();
-            HenryTokens.Init();
+            AE86Config.Init();
+            AE86States.Init();
+            AE86Tokens.Init();
 
-            HenryAssets.Init(assetBundle);
-            HenryBuffs.Init(assetBundle);
+            AE86Assets.Init(assetBundle);
+            AE86Buffs.Init(assetBundle);
 
             InitializeEntityStateMachines();
             InitializeSkills();
@@ -119,7 +119,7 @@ namespace HenryMod.Survivors.Henry
         private void AdditionalBodySetup()
         {
             AddHitboxes();
-            bodyPrefab.AddComponent<HenryWeaponComponent>();
+            bodyPrefab.AddComponent<AE86WeaponComponent>();
             //bodyPrefab.AddComponent<HuntressTrackerComopnent>();
             //anything else here
         }
@@ -139,7 +139,7 @@ namespace HenryMod.Survivors.Henry
             //the main "Body" state machine has some special properties
             Prefabs.AddMainEntityStateMachine(bodyPrefab, "Body", typeof(EntityStates.GenericCharacterMain), typeof(EntityStates.SpawnTeleporterState));
             //if you set up a custom main characterstate, set it up here
-                //don't forget to register custom entitystates in your HenryStates.cs
+                //don't forget to register custom entitystates in your AE86States.cs
 
             Prefabs.AddEntityStateMachine(bodyPrefab, "Weapon");
             Prefabs.AddEntityStateMachine(bodyPrefab, "Weapon2");
@@ -176,7 +176,7 @@ namespace HenryMod.Survivors.Henry
             GenericSkill passiveGenericSkill = Skills.CreateGenericSkillWithSkillFamily(bodyPrefab, "PassiveSkill");
             SkillDef passiveSkillDef1 = Skills.CreateSkillDef(new SkillDefInfo
             {
-                skillName = "HenryPassive",
+                skillName = "AE86Passive",
                 skillNameToken = HENRY_PREFIX + "PASSIVE_NAME",
                 skillDescriptionToken = HENRY_PREFIX + "PASSIVE_DESCRIPTION",
                 keywordTokens = new string[] { "KEYWORD_AGILE" },
@@ -220,7 +220,7 @@ namespace HenryMod.Survivors.Henry
             //it is also a SteppedSkillDef. Custom Skilldefs are very useful for custom behaviors related to casting a skill. see ror2's different skilldefs for reference
             SteppedSkillDef primarySkillDef1 = Skills.CreateSkillDef<SteppedSkillDef>(new SkillDefInfo
                 (
-                    "HenrySlash",
+                    "AE86Slash",
                     HENRY_PREFIX + "PRIMARY_SLASH_NAME",
                     HENRY_PREFIX + "PRIMARY_SLASH_DESCRIPTION",
                     assetBundle.LoadAsset<Sprite>("texPrimaryIcon"),
@@ -242,7 +242,7 @@ namespace HenryMod.Survivors.Henry
             //here is a basic skill def with all fields accounted for
             SkillDef secondarySkillDef1 = Skills.CreateSkillDef(new SkillDefInfo
             {
-                skillName = "HenryGun",
+                skillName = "AE86Gun",
                 skillNameToken = HENRY_PREFIX + "SECONDARY_GUN_NAME",
                 skillDescriptionToken = HENRY_PREFIX + "SECONDARY_GUN_DESCRIPTION",
                 keywordTokens = new string[] { "KEYWORD_AGILE" },
@@ -282,7 +282,7 @@ namespace HenryMod.Survivors.Henry
             //here's a skilldef of a typical movement skill.
             SkillDef utilitySkillDef1 = Skills.CreateSkillDef(new SkillDefInfo
             {
-                skillName = "HenryRoll",
+                skillName = "AE86Roll",
                 skillNameToken = HENRY_PREFIX + "UTILITY_ROLL_NAME",
                 skillDescriptionToken = HENRY_PREFIX + "UTILITY_ROLL_DESCRIPTION",
                 skillIcon = assetBundle.LoadAsset<Sprite>("texUtilityIcon"),
@@ -320,7 +320,7 @@ namespace HenryMod.Survivors.Henry
             //a basic skill. some fields are omitted and will just have default values
             SkillDef specialSkillDef1 = Skills.CreateSkillDef(new SkillDefInfo
             {
-                skillName = "HenryBomb",
+                skillName = "AE86Bomb",
                 skillNameToken = HENRY_PREFIX + "SPECIAL_BOMB_NAME",
                 skillDescriptionToken = HENRY_PREFIX + "SPECIAL_BOMB_DESCRIPTION",
                 skillIcon = assetBundle.LoadAsset<Sprite>("texSpecialIcon"),
@@ -362,9 +362,9 @@ namespace HenryMod.Survivors.Henry
             //currently not needed as with only 1 skin they will simply take the default meshes
                 //uncomment this when you have another skin
             //defaultSkin.meshReplacements = Modules.Skins.getMeshReplacements(assetBundle, defaultRendererinfos,
-            //    "meshHenrySword",
-            //    "meshHenryGun",
-            //    "meshHenry");
+            //    "meshAE86Sword",
+            //    "meshAE86Gun",
+            //    "meshAE86");
 
             //add new skindef to our list of skindefs. this is what we'll be passing to the SkinController
             skins.Add(defaultSkin);
@@ -378,20 +378,20 @@ namespace HenryMod.Survivors.Henry
             //    assetBundle.LoadAsset<Sprite>("texMasteryAchievement"),
             //    defaultRendererinfos,
             //    prefabCharacterModel.gameObject,
-            //    HenryUnlockables.masterySkinUnlockableDef);
+            //    AE86Unlockables.masterySkinUnlockableDef);
 
             ////adding the mesh replacements as above. 
             ////if you don't want to replace the mesh (for example, you only want to replace the material), pass in null so the order is preserved
             //masterySkin.meshReplacements = Modules.Skins.getMeshReplacements(assetBundle, defaultRendererinfos,
-            //    "meshHenrySwordAlt",
+            //    "meshAE86SwordAlt",
             //    null,//no gun mesh replacement. use same gun mesh
-            //    "meshHenryAlt");
+            //    "meshAE86Alt");
 
             ////masterySkin has a new set of RendererInfos (based on default rendererinfos)
             ////you can simply access the RendererInfos' materials and set them to the new materials for your skin.
-            //masterySkin.rendererInfos[0].defaultMaterial = assetBundle.LoadMaterial("matHenryAlt");
-            //masterySkin.rendererInfos[1].defaultMaterial = assetBundle.LoadMaterial("matHenryAlt");
-            //masterySkin.rendererInfos[2].defaultMaterial = assetBundle.LoadMaterial("matHenryAlt");
+            //masterySkin.rendererInfos[0].defaultMaterial = assetBundle.LoadMaterial("matAE86Alt");
+            //masterySkin.rendererInfos[1].defaultMaterial = assetBundle.LoadMaterial("matAE86Alt");
+            //masterySkin.rendererInfos[2].defaultMaterial = assetBundle.LoadMaterial("matAE86Alt");
 
             ////here's a barebones example of using gameobjectactivations that could probably be streamlined or rewritten entirely, truthfully, but it works
             //masterySkin.gameObjectActivations = new SkinDef.GameObjectActivation[]
@@ -421,7 +421,7 @@ namespace HenryMod.Survivors.Henry
             //Modules.Prefabs.CloneDopplegangerMaster(bodyPrefab, masterName, "Merc");
 
             //how to set up AI in code
-            HenryAI.Init(bodyPrefab, masterName);
+            AE86AI.Init(bodyPrefab, masterName);
 
             //how to load a master set up in unity, can be an empty gameobject with just AISkillDriver components
             //assetBundle.LoadMaster(bodyPrefab, masterName);
@@ -435,7 +435,7 @@ namespace HenryMod.Survivors.Henry
         private void RecalculateStatsAPI_GetStatCoefficients(CharacterBody sender, R2API.RecalculateStatsAPI.StatHookEventArgs args)
         {
 
-            if (sender.HasBuff(HenryBuffs.armorBuff))
+            if (sender.HasBuff(AE86Buffs.armorBuff))
             {
                 args.armorAdd += 300;
             }

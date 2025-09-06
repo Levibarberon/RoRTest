@@ -5,11 +5,11 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HenryMod.Modules {
+namespace AE86Mod.Modules {
     internal class ContentPacks : IContentPackProvider
     {
         internal ContentPack contentPack = new ContentPack();
-        public string identifier => HenryPlugin.MODUID;
+        public string identifier => AE86Plugin.MODUID;
 
         public static List<GameObject> bodyPrefabs = new List<GameObject>();
         public static List<GameObject> masterPrefabs = new List<GameObject>();

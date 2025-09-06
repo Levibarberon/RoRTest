@@ -1,13 +1,13 @@
 ﻿using EntityStates;
-using HenryMod.Survivors.Henry;
+using AE86Mod.Survivors.AE86;
 using RoR2;
 using UnityEngine;
 
-namespace HenryMod.Survivors.Henry.SkillStates
+namespace AE86Mod.Survivors.AE86.SkillStates
 {
     public class Shoot : BaseSkillState
     {
-        public static float damageCoefficient = HenryStaticValues.gunDamageCoefficient;
+        public static float damageCoefficient = AE86StaticValues.gunDamageCoefficient;
         public static float procCoefficient = 1f;
         public static float baseDuration = 0.6f;
         //delay on firing is usually ass-feeling. only set this if you know what you're doing
@@ -62,7 +62,7 @@ namespace HenryMod.Survivors.Henry.SkillStates
 
                 characterBody.AddSpreadBloom(1.5f);
                 EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FirePistol2.muzzleEffectPrefab, gameObject, muzzleString, false);
-                Util.PlaySound("HenryShootPistol", gameObject);
+                Util.PlaySound("AE86ShootPistol", gameObject);
 
                 if (isAuthority)
                 {

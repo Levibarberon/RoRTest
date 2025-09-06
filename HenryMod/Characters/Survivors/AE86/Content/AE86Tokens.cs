@@ -1,26 +1,26 @@
 ﻿using System;
-using HenryMod.Modules;
-using HenryMod.Survivors.Henry.Achievements;
+using AE86Mod.Modules;
+using AE86Mod.Survivors.AE86.Achievements;
 
-namespace HenryMod.Survivors.Henry
+namespace AE86Mod.Survivors.AE86
 {
-    public static class HenryTokens
+    public static class AE86Tokens
     {
         public static void Init()
         {
-            AddHenryTokens();
+            AddAE86Tokens();
 
             ////uncomment this to spit out a lanuage file with all the above tokens that people can translate
             ////make sure you set Language.usingLanguageFolder and printingEnabled to true
-            //Language.PrintOutput("Henry.txt");
+            //Language.PrintOutput("AE86.txt");
             ////refer to guide on how to build and distribute your mod with the proper folders
         }
 
-        public static void AddHenryTokens()
+        public static void AddAE86Tokens()
         {
-            string prefix = HenrySurvivor.HENRY_PREFIX;
+            string prefix = AE86Survivor.HENRY_PREFIX;
 
-            string desc = "Henry is a skilled fighter who makes use of a wide arsenal of weaponry to take down his foes.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine
+            string desc = "AE86 is a skilled fighter who makes use of a wide arsenal of weaponry to take down his foes.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine
              + "< ! > Sword is a good all-rounder while Boxing Gloves are better for laying a beatdown on more powerful foes." + Environment.NewLine + Environment.NewLine
              + "< ! > Pistol is a powerful anti air, with its low cooldown and high damage." + Environment.NewLine + Environment.NewLine
              + "< ! > Roll has a lingering armor buff that helps to use it aggressively." + Environment.NewLine + Environment.NewLine
@@ -29,7 +29,7 @@ namespace HenryMod.Survivors.Henry
             string outro = "..and so he left, searching for a new identity.";
             string outroFailure = "..and so he vanished, forever a blank slate.";
 
-            Language.Add(prefix + "NAME", "Henry");
+            Language.Add(prefix + "NAME", "AE86");
             Language.Add(prefix + "DESCRIPTION", desc);
             Language.Add(prefix + "SUBTITLE", "The Chosen One");
             Language.Add(prefix + "LORE", "sample lore");
@@ -41,18 +41,18 @@ namespace HenryMod.Survivors.Henry
             #endregion
 
             #region Passive
-            Language.Add(prefix + "PASSIVE_NAME", "Henry passive");
+            Language.Add(prefix + "PASSIVE_NAME", "AE86 passive");
             Language.Add(prefix + "PASSIVE_DESCRIPTION", "Sample text.");
             #endregion
 
             #region Primary
             Language.Add(prefix + "PRIMARY_SLASH_NAME", "Sword");
-            Language.Add(prefix + "PRIMARY_SLASH_DESCRIPTION", Tokens.agilePrefix + $"Swing forward for <style=cIsDamage>{100f * HenryStaticValues.swordDamageCoefficient}% damage</style>.");
+            Language.Add(prefix + "PRIMARY_SLASH_DESCRIPTION", Tokens.agilePrefix + $"Swing forward for <style=cIsDamage>{100f * AE86StaticValues.swordDamageCoefficient}% damage</style>.");
             #endregion
 
             #region Secondary
             Language.Add(prefix + "SECONDARY_GUN_NAME", "Handgun");
-            Language.Add(prefix + "SECONDARY_GUN_DESCRIPTION", Tokens.agilePrefix + $"Fire a handgun for <style=cIsDamage>{100f * HenryStaticValues.gunDamageCoefficient}% damage</style>.");
+            Language.Add(prefix + "SECONDARY_GUN_DESCRIPTION", Tokens.agilePrefix + $"Fire a handgun for <style=cIsDamage>{100f * AE86StaticValues.gunDamageCoefficient}% damage</style>.");
             #endregion
 
             #region Utility
@@ -62,12 +62,12 @@ namespace HenryMod.Survivors.Henry
 
             #region Special
             Language.Add(prefix + "SPECIAL_BOMB_NAME", "Bomb");
-            Language.Add(prefix + "SPECIAL_BOMB_DESCRIPTION", $"Throw a bomb for <style=cIsDamage>{100f * HenryStaticValues.bombDamageCoefficient}% damage</style>.");
+            Language.Add(prefix + "SPECIAL_BOMB_DESCRIPTION", $"Throw a bomb for <style=cIsDamage>{100f * AE86StaticValues.bombDamageCoefficient}% damage</style>.");
             #endregion
 
             #region Achievements
-            Language.Add(Tokens.GetAchievementNameToken(HenryMasteryAchievement.identifier), "Henry: Mastery");
-            Language.Add(Tokens.GetAchievementDescriptionToken(HenryMasteryAchievement.identifier), "As Henry, beat the game or obliterate on Monsoon.");
+            Language.Add(Tokens.GetAchievementNameToken(AE86MasteryAchievement.identifier), "AE86: Mastery");
+            Language.Add(Tokens.GetAchievementDescriptionToken(AE86MasteryAchievement.identifier), "As AE86, beat the game or obliterate on Monsoon.");
             #endregion
         }
     }

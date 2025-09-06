@@ -1,4 +1,4 @@
-﻿namespace HenryMod.Modules
+﻿namespace AE86Mod.Modules
 {
     internal static class Tokens
     {

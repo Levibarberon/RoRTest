@@ -1,9 +1,9 @@
 ﻿using BepInEx.Configuration;
-using HenryMod.Modules;
+using AE86Mod.Modules;
 
-namespace HenryMod.Survivors.Henry
+namespace AE86Mod.Survivors.AE86
 {
-    public static class HenryConfig
+    public static class AE86Config
     {
         public static ConfigEntry<bool> someConfigBool;
         public static ConfigEntry<float> someConfigFloat;
@@ -11,7 +11,7 @@ namespace HenryMod.Survivors.Henry
 
         public static void Init()
         {
-            string section = "Henry";
+            string section = "AE86";
 
             someConfigBool = Config.BindAndOptions(
                 section,
