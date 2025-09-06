@@ -37,7 +37,7 @@ namespace Ae86Mod.Survivors.Ae86
             bodyNameToken = AE86_PREFIX + "NAME",
             subtitleNameToken = AE86_PREFIX + "SUBTITLE",
 
-            characterPortrait = assetBundle.LoadAsset<Texture>("texAe86Icon"),
+            characterPortrait = assetBundle.LoadAsset<Texture>("texHenryIcon"),
             bodyColor = Color.white,
             sortPosition = 100,
 
@@ -56,7 +56,7 @@ namespace Ae86Mod.Survivors.Ae86
                 new CustomRendererInfo
                 {
                     childName = "SwordModel",
-                    material = assetBundle.LoadMaterial("matAe86"),
+                    material = assetBundle.LoadMaterial("matHenry"),
                 },
                 new CustomRendererInfo
                 {
