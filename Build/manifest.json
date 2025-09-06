@@ -3,7 +3,7 @@
     "author": "Levi and Matthias",
     "version_number": "1.0.0",
     "website_url": "",
-    "description": "I have not changed the manifest and now my mod will be deprecated",
+    "description": "I have changed the manifest and now my mod will not be deprecated",
     "dependencies": [
         "bbepis-BepInExPack-5.4.1905",
         "RiskofThunder-R2API_Core-5.0.3",
