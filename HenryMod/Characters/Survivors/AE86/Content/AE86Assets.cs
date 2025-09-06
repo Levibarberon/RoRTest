@@ -1,12 +1,12 @@
 ﻿using RoR2;
 using UnityEngine;
-using AE86Mod.Modules;
+using Ae86Mod.Modules;
 using System;
 using RoR2.Projectile;
 
-namespace AE86Mod.Survivors.AE86
+namespace Ae86Mod.Survivors.Ae86
 {
-    public static class AE86Assets
+    public static class Ae86Assets
     {
         // particle effects
         public static GameObject swordSwingEffect;
@@ -27,7 +27,7 @@ namespace AE86Mod.Survivors.AE86
 
             _assetBundle = assetBundle;
 
-            swordHitSoundEvent = Content.CreateAndAddNetworkSoundEventDef("AE86SwordHit");
+            swordHitSoundEvent = Content.CreateAndAddNetworkSoundEventDef("Ae86SwordHit");
 
             CreateEffects();
 
@@ -39,13 +39,13 @@ namespace AE86Mod.Survivors.AE86
         {
             CreateBombExplosionEffect();
 
-            swordSwingEffect = _assetBundle.LoadEffect("AE86SwordSwingEffect", true);
-            swordHitImpactEffect = _assetBundle.LoadEffect("ImpactAE86Slash");
+            swordSwingEffect = _assetBundle.LoadEffect("Ae86SwordSwingEffect", true);
+            swordHitImpactEffect = _assetBundle.LoadEffect("ImpactAe86Slash");
         }
 
         private static void CreateBombExplosionEffect()
         {
-            bombExplosionEffect = _assetBundle.LoadEffect("BombExplosionEffect", "AE86BombExplosion");
+            bombExplosionEffect = _assetBundle.LoadEffect("BombExplosionEffect", "Ae86BombExplosion");
 
             if (!bombExplosionEffect)
                 return;
@@ -76,7 +76,7 @@ namespace AE86Mod.Survivors.AE86
         private static void CreateBombProjectile()
         {
             //highly recommend setting up projectiles in editor, but this is a quick and dirty way to prototype if you want
-            bombProjectilePrefab = Asset.CloneProjectilePrefab("CommandoGrenadeProjectile", "AE86BombProjectile");
+            bombProjectilePrefab = Asset.CloneProjectilePrefab("CommandoGrenadeProjectile", "Ae86BombProjectile");
 
             //remove their ProjectileImpactExplosion component and start from default values
             UnityEngine.Object.Destroy(bombProjectilePrefab.GetComponent<ProjectileImpactExplosion>());
@@ -88,14 +88,14 @@ namespace AE86Mod.Survivors.AE86
             bombImpactExplosion.destroyOnEnemy = true;
             bombImpactExplosion.lifetime = 12f;
             bombImpactExplosion.impactEffect = bombExplosionEffect;
-            bombImpactExplosion.lifetimeExpiredSound = Content.CreateAndAddNetworkSoundEventDef("AE86BombExplosion");
+            bombImpactExplosion.lifetimeExpiredSound = Content.CreateAndAddNetworkSoundEventDef("Ae86BombExplosion");
             bombImpactExplosion.timerAfterImpact = true;
             bombImpactExplosion.lifetimeAfterImpact = 0.1f;
 
             ProjectileController bombController = bombProjectilePrefab.GetComponent<ProjectileController>();
 
-            if (_assetBundle.LoadAsset<GameObject>("AE86BombGhost") != null)
-                bombController.ghostPrefab = _assetBundle.CreateProjectileGhostPrefab("AE86BombGhost");
+            if (_assetBundle.LoadAsset<GameObject>("Ae86BombGhost") != null)
+                bombController.ghostPrefab = _assetBundle.CreateProjectileGhostPrefab("Ae86BombGhost");
             
             bombController.startSound = "";
         }

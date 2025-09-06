@@ -1,7 +1,7 @@
 ﻿using EntityStates;
 using System;
 
-namespace AE86Mod.Modules.BaseStates
+namespace Ae86Mod.Modules.BaseStates
 {
     //see example skills below
     public abstract class BaseTimedSkillState : BaseSkillState

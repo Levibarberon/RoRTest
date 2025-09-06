@@ -9,7 +9,7 @@ using RoR2.UI;
 using RoR2.Projectile;
 using Path = System.IO.Path;
 
-namespace AE86Mod.Modules
+namespace Ae86Mod.Modules
 {
     internal static class Asset
     {
@@ -33,7 +33,7 @@ namespace AE86Mod.Modules
             AssetBundle assetBundle = null;
             try
             {
-                assetBundle = AssetBundle.LoadFromFile(Path.Combine(Path.GetDirectoryName(AE86Plugin.instance.Info.Location), "AssetBundles", bundleName));
+                assetBundle = AssetBundle.LoadFromFile(Path.Combine(Path.GetDirectoryName(Ae86Plugin.instance.Info.Location), "AssetBundles", bundleName));
             }
             catch (System.Exception e)
             {

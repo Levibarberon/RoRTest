@@ -1,13 +1,13 @@
 ﻿using EntityStates;
-using AE86Mod.Survivors.AE86;
+using Ae86Mod.Survivors.Ae86;
 using RoR2;
 using UnityEngine;
 
-namespace AE86Mod.Survivors.AE86.SkillStates
+namespace Ae86Mod.Survivors.Ae86.SkillStates
 {
     public class Shoot : BaseSkillState
     {
-        public static float damageCoefficient = AE86StaticValues.gunDamageCoefficient;
+        public static float damageCoefficient = Ae86StaticValues.gunDamageCoefficient;
         public static float procCoefficient = 1f;
         public static float baseDuration = 0.6f;
         //delay on firing is usually ass-feeling. only set this if you know what you're doing
@@ -62,7 +62,7 @@ namespace AE86Mod.Survivors.AE86.SkillStates
 
                 characterBody.AddSpreadBloom(1.5f);
                 EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FirePistol2.muzzleEffectPrefab, gameObject, muzzleString, false);
-                Util.PlaySound("AE86ShootPistol", gameObject);
+                Util.PlaySound("Ae86ShootPistol", gameObject);
 
                 if (isAuthority)
                 {

@@ -1,8 +1,8 @@
-﻿using AE86Mod.Modules.BaseStates;
+﻿using Ae86Mod.Modules.BaseStates;
 using RoR2;
 using UnityEngine;
 
-namespace AE86Mod.Survivors.AE86.SkillStates
+namespace Ae86Mod.Survivors.Ae86.SkillStates
 {
     public class SlashCombo : BaseMeleeAttack
     {
@@ -11,7 +11,7 @@ namespace AE86Mod.Survivors.AE86.SkillStates
             hitboxGroupName = "SwordGroup";
 
             damageType = DamageTypeCombo.GenericPrimary;
-            damageCoefficient = AE86StaticValues.swordDamageCoefficient;
+            damageCoefficient = Ae86StaticValues.swordDamageCoefficient;
             procCoefficient = 1f;
             pushForce = 300f;
             bonusForce = Vector3.zero;
@@ -29,14 +29,14 @@ namespace AE86Mod.Survivors.AE86.SkillStates
             attackRecoil = 0.5f;
             hitHopVelocity = 4f;
 
-            swingSoundString = "AE86SwordSwing";
+            swingSoundString = "Ae86SwordSwing";
             hitSoundString = "";
             muzzleString = swingIndex % 2 == 0 ? "SwingLeft" : "SwingRight";
             playbackRateParam = "Slash.playbackRate";
-            swingEffectPrefab = AE86Assets.swordSwingEffect;
-            hitEffectPrefab = AE86Assets.swordHitImpactEffect;
+            swingEffectPrefab = Ae86Assets.swordSwingEffect;
+            hitEffectPrefab = Ae86Assets.swordHitImpactEffect;
 
-            impactSound = AE86Assets.swordHitSoundEvent.index;
+            impactSound = Ae86Assets.swordHitSoundEvent.index;
 
             base.OnEnter();
         }

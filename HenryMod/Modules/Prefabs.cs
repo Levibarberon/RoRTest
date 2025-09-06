@@ -2,14 +2,14 @@
 using RoR2;
 using System.Collections.Generic;
 using UnityEngine;
-using AE86Mod.Modules.Characters;
+using Ae86Mod.Modules.Characters;
 using RoR2.CharacterAI;
 using static RoR2.CharacterAI.AISkillDriver;
 using RoR2.Skills;
 using System;
 using System.Linq;
 
-namespace AE86Mod.Modules
+namespace Ae86Mod.Modules
 {
     // module for creating body prefabs and whatnot
     // recommended to simply avoid touching this unless you REALLY need to

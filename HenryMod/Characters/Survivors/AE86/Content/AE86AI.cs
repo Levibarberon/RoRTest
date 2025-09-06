@@ -2,9 +2,9 @@
 using RoR2.CharacterAI;
 using UnityEngine;
 
-namespace AE86Mod.Survivors.AE86
+namespace Ae86Mod.Survivors.Ae86
 {
-    public static class AE86AI
+    public static class Ae86AI
     {
         public static void Init(GameObject bodyPrefab, string masterName)
         {

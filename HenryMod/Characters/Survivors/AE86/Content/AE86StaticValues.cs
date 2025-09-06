@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace AE86Mod.Survivors.AE86
+namespace Ae86Mod.Survivors.Ae86
 {
-    public static class AE86StaticValues
+    public static class Ae86StaticValues
     {
         public const float swordDamageCoefficient = 2.8f;
 

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace AE86Mod.Modules {
+namespace Ae86Mod.Modules {
     internal static class Language
     {
         public static string TokensOutput = "";
@@ -19,7 +19,7 @@ namespace AE86Mod.Modules {
         }
 
         private static void Language_collectLanguageRootFolders(List<string> obj) {
-            string path = Path.Combine(Path.GetDirectoryName(AE86Plugin.instance.Info.Location), "Language");
+            string path = Path.Combine(Path.GetDirectoryName(Ae86Plugin.instance.Info.Location), "Language");
             if (Directory.Exists(path)) {
                 obj.Add(path);
             }
@@ -47,7 +47,7 @@ namespace AE86Mod.Modules {
 
             //write a language file next to your mod. must have a folder called Language next to your mod dll.
             if (!string.IsNullOrEmpty(fileName)) {
-                string path = Path.Combine(Directory.GetParent(AE86Plugin.instance.Info.Location).FullName, "Language", "en", fileName);
+                string path = Path.Combine(Directory.GetParent(Ae86Plugin.instance.Info.Location).FullName, "Language", "en", fileName);
                 File.WriteAllText(path, strings);
             }
 

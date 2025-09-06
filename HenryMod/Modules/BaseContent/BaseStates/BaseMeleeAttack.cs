@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace AE86Mod.Modules.BaseStates
+namespace Ae86Mod.Modules.BaseStates
 {
     public abstract class BaseMeleeAttack : BaseSkillState, SteppedSkillDef.IStepSetter
     {

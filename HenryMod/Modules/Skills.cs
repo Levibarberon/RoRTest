@@ -3,10 +3,10 @@ using RoR2;
 using RoR2.Skills;
 using System;
 using System.Collections.Generic;
-using AE86Mod;
+using Ae86Mod;
 using UnityEngine;
 
-namespace AE86Mod.Modules
+namespace Ae86Mod.Modules
 {
     internal static class Skills
     {
@@ -185,7 +185,7 @@ namespace AE86Mod.Modules
 
             skillDef.keywordTokens = skillDefInfo.keywordTokens;
 
-            AE86Mod.Modules.Content.AddSkillDef(skillDef);
+            Ae86Mod.Modules.Content.AddSkillDef(skillDef);
 
 
             return skillDef;

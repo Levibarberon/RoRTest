@@ -1,4 +1,4 @@
-﻿namespace AE86Mod.Modules
+﻿namespace Ae86Mod.Modules
 {
     internal static class Tokens
     {

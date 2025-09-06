@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace AE86Mod.Modules
+namespace Ae86Mod.Modules
 {
     internal static class ItemDisplays
     {

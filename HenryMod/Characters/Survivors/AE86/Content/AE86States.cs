@@ -1,8 +1,8 @@
-﻿using AE86Mod.Survivors.AE86.SkillStates;
+﻿using Ae86Mod.Survivors.Ae86.SkillStates;
 
-namespace AE86Mod.Survivors.AE86
+namespace Ae86Mod.Survivors.Ae86
 {
-    public static class AE86States
+    public static class Ae86States
     {
         public static void Init()
         {

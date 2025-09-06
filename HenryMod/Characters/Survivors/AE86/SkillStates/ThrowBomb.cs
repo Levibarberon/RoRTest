@@ -1,10 +1,10 @@
 ﻿using EntityStates;
-using AE86Mod.Survivors.AE86;
+using Ae86Mod.Survivors.Ae86;
 using RoR2;
 using RoR2.Projectile;
 using UnityEngine;
 
-namespace AE86Mod.Survivors.AE86.SkillStates
+namespace Ae86Mod.Survivors.Ae86.SkillStates
 {
     public class ThrowBomb : GenericProjectileBaseState
     {
@@ -16,11 +16,11 @@ namespace AE86Mod.Survivors.AE86.SkillStates
 
         public override void OnEnter()
         {
-            projectilePrefab = AE86Assets.bombProjectilePrefab;
+            projectilePrefab = Ae86Assets.bombProjectilePrefab;
             //base.effectPrefab = Modules.Assets.SomeMuzzleEffect;
             //targetmuzzle = "muzzleThrow"
 
-            attackSoundString = "AE86BombThrow";
+            attackSoundString = "Ae86BombThrow";
 
             baseDuration = BaseDuration;
             baseDelayBeforeFiringProjectile = BaseDelayDuration;

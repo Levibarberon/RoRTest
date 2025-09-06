@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace AE86Mod.Modules
+namespace Ae86Mod.Modules
 {
     internal static class Skins
     {
@@ -88,9 +88,9 @@ namespace AE86Mod.Modules
         /// pass in strings for mesh assets in your bundle. pass the same amount and order based on your rendererinfos, filling with null as needed
         /// <code>
         /// myskindef.meshReplacements = Modules.Skins.getMeshReplacements(defaultRenderers,
-        ///    "meshAE86Sword",
+        ///    "meshAe86Sword",
         ///    null,
-        ///    "meshAE86");
+        ///    "meshAe86");
         /// </code>
         /// </summary>
         /// <param name="assetBundle">your skindef's rendererinfos to access the renderers</param>

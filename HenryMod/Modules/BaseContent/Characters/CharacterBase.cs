@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace AE86Mod.Modules.Characters
+namespace Ae86Mod.Modules.Characters
 {
     public abstract class CharacterBase<T> where T : CharacterBase<T>, new()
     {

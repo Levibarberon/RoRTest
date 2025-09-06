@@ -2,11 +2,11 @@
 using BepInEx.Configuration;
 using UnityEngine;
 
-namespace AE86Mod.Modules
+namespace Ae86Mod.Modules
 {
     public static class Config
     {
-        public static ConfigFile MyConfig = AE86Plugin.instance.Config;
+        public static ConfigFile MyConfig = Ae86Plugin.instance.Config;
 
         /// <summary>
         /// automatically makes config entries for disabling survivors

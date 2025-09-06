@@ -1,43 +1,43 @@
 ﻿using BepInEx.Configuration;
-using AE86Mod.Modules;
-using AE86Mod.Modules.Characters;
-using AE86Mod.Survivors.AE86.Components;
-using AE86Mod.Survivors.AE86.SkillStates;
+using Ae86Mod.Modules;
+using Ae86Mod.Modules.Characters;
+using Ae86Mod.Survivors.Ae86.Components;
+using Ae86Mod.Survivors.Ae86.SkillStates;
 using RoR2;
 using RoR2.Skills;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace AE86Mod.Survivors.AE86
+namespace Ae86Mod.Survivors.Ae86
 {
-    public class AE86Survivor : SurvivorBase<AE86Survivor>
+    public class Ae86Survivor : SurvivorBase<Ae86Survivor>
     {
         //used to load the assetbundle for this character. must be unique
-        public override string assetBundleName => "myassetbundle"; //if you do not change this, you are giving permission to deprecate the mod
+        public override string assetBundleName => "ae86"; //if you do not change this, you are giving permission to deprecate the mod
 
         //the name of the prefab we will create. conventionally ending in "Body". must be unique
-        public override string bodyName => "AE86Body"; //if you do not change this, you get the point by now
+        public override string bodyName => "Ae86Body"; //if you do not change this, you get the point by now
 
         //name of the ai master for vengeance and goobo. must be unique
-        public override string masterName => "AE86MonsterMaster"; //if you do not
+        public override string masterName => "Ae86MonsterMaster"; //if you do not
 
         //the names of the prefabs you set up in unity that we will use to build your character
-        public override string modelPrefabName => "mdlAE86";
-        public override string displayPrefabName => "AE86Display";
+        public override string modelPrefabName => "mdlAe86";
+        public override string displayPrefabName => "Ae86Display";
 
-        public const string HENRY_PREFIX = AE86Plugin.DEVELOPER_PREFIX + "_HENRY_";
+        public const string AE86_PREFIX = Ae86Plugin.DEVELOPER_PREFIX + "_AE86_";
 
         //used when registering your survivor's language tokens
-        public override string survivorTokenPrefix => HENRY_PREFIX;
+        public override string survivorTokenPrefix => AE86_PREFIX;
         
         public override BodyInfo bodyInfo => new BodyInfo
         {
             bodyName = bodyName,
-            bodyNameToken = HENRY_PREFIX + "NAME",
-            subtitleNameToken = HENRY_PREFIX + "SUBTITLE",
+            bodyNameToken = AE86_PREFIX + "NAME",
+            subtitleNameToken = AE86_PREFIX + "SUBTITLE",
 
-            characterPortrait = assetBundle.LoadAsset<Texture>("texAE86Icon"),
+            characterPortrait = assetBundle.LoadAsset<Texture>("texAe86Icon"),
             bodyColor = Color.white,
             sortPosition = 100,
 
@@ -56,7 +56,7 @@ namespace AE86Mod.Survivors.AE86
                 new CustomRendererInfo
                 {
                     childName = "SwordModel",
-                    material = assetBundle.LoadMaterial("matAE86"),
+                    material = assetBundle.LoadMaterial("matAe86"),
                 },
                 new CustomRendererInfo
                 {
@@ -68,9 +68,9 @@ namespace AE86Mod.Survivors.AE86
                 }
         };
 
-        public override UnlockableDef characterUnlockableDef => AE86Unlockables.characterUnlockableDef;
+        public override UnlockableDef characterUnlockableDef => Ae86Unlockables.characterUnlockableDef;
         
-        public override ItemDisplaysBase itemDisplays => new AE86ItemDisplays();
+        public override ItemDisplaysBase itemDisplays => new Ae86ItemDisplays();
 
         //set in base classes
         public override AssetBundle assetBundle { get; protected set; }
@@ -84,7 +84,7 @@ namespace AE86Mod.Survivors.AE86
         public override void Initialize()
         {
             //uncomment if you have multiple characters
-            //ConfigEntry<bool> characterEnabled = Config.CharacterEnableConfig("Survivors", "AE86");
+            //ConfigEntry<bool> characterEnabled = Config.CharacterEnableConfig("Survivors", "Ae86");
 
             //if (!characterEnabled.Value)
             //    return;
@@ -95,16 +95,16 @@ namespace AE86Mod.Survivors.AE86
         public override void InitializeCharacter()
         {
             //need the character unlockable before you initialize the survivordef
-            AE86Unlockables.Init();
+            Ae86Unlockables.Init();
 
             base.InitializeCharacter();
 
-            AE86Config.Init();
-            AE86States.Init();
-            AE86Tokens.Init();
+            Ae86Config.Init();
+            Ae86States.Init();
+            Ae86Tokens.Init();
 
-            AE86Assets.Init(assetBundle);
-            AE86Buffs.Init(assetBundle);
+            Ae86Assets.Init(assetBundle);
+            Ae86Buffs.Init(assetBundle);
 
             InitializeEntityStateMachines();
             InitializeSkills();
@@ -119,7 +119,7 @@ namespace AE86Mod.Survivors.AE86
         private void AdditionalBodySetup()
         {
             AddHitboxes();
-            bodyPrefab.AddComponent<AE86WeaponComponent>();
+            bodyPrefab.AddComponent<Ae86WeaponComponent>();
             //bodyPrefab.AddComponent<HuntressTrackerComopnent>();
             //anything else here
         }
@@ -139,7 +139,7 @@ namespace AE86Mod.Survivors.AE86
             //the main "Body" state machine has some special properties
             Prefabs.AddMainEntityStateMachine(bodyPrefab, "Body", typeof(EntityStates.GenericCharacterMain), typeof(EntityStates.SpawnTeleporterState));
             //if you set up a custom main characterstate, set it up here
-                //don't forget to register custom entitystates in your AE86States.cs
+                //don't forget to register custom entitystates in your Ae86States.cs
 
             Prefabs.AddEntityStateMachine(bodyPrefab, "Weapon");
             Prefabs.AddEntityStateMachine(bodyPrefab, "Weapon2");
@@ -166,8 +166,8 @@ namespace AE86Mod.Survivors.AE86
             bodyPrefab.GetComponent<SkillLocator>().passiveSkill = new SkillLocator.PassiveSkill
             {
                 enabled = true,
-                skillNameToken = HENRY_PREFIX + "PASSIVE_NAME",
-                skillDescriptionToken = HENRY_PREFIX + "PASSIVE_DESCRIPTION",
+                skillNameToken = AE86_PREFIX + "PASSIVE_NAME",
+                skillDescriptionToken = AE86_PREFIX + "PASSIVE_DESCRIPTION",
                 keywordToken = "KEYWORD_STUNNING",
                 icon = assetBundle.LoadAsset<Sprite>("texPassiveIcon"),
             };
@@ -176,9 +176,9 @@ namespace AE86Mod.Survivors.AE86
             GenericSkill passiveGenericSkill = Skills.CreateGenericSkillWithSkillFamily(bodyPrefab, "PassiveSkill");
             SkillDef passiveSkillDef1 = Skills.CreateSkillDef(new SkillDefInfo
             {
-                skillName = "AE86Passive",
-                skillNameToken = HENRY_PREFIX + "PASSIVE_NAME",
-                skillDescriptionToken = HENRY_PREFIX + "PASSIVE_DESCRIPTION",
+                skillName = "Ae86Passive",
+                skillNameToken = AE86_PREFIX + "PASSIVE_NAME",
+                skillDescriptionToken = AE86_PREFIX + "PASSIVE_DESCRIPTION",
                 keywordTokens = new string[] { "KEYWORD_AGILE" },
                 skillIcon = assetBundle.LoadAsset<Sprite>("texPassiveIcon"),
 
@@ -220,9 +220,9 @@ namespace AE86Mod.Survivors.AE86
             //it is also a SteppedSkillDef. Custom Skilldefs are very useful for custom behaviors related to casting a skill. see ror2's different skilldefs for reference
             SteppedSkillDef primarySkillDef1 = Skills.CreateSkillDef<SteppedSkillDef>(new SkillDefInfo
                 (
-                    "AE86Slash",
-                    HENRY_PREFIX + "PRIMARY_SLASH_NAME",
-                    HENRY_PREFIX + "PRIMARY_SLASH_DESCRIPTION",
+                    "Ae86Slash",
+                    AE86_PREFIX + "PRIMARY_SLASH_NAME",
+                    AE86_PREFIX + "PRIMARY_SLASH_DESCRIPTION",
                     assetBundle.LoadAsset<Sprite>("texPrimaryIcon"),
                     new EntityStates.SerializableEntityStateType(typeof(SkillStates.SlashCombo)),
                     "Weapon",
@@ -242,9 +242,9 @@ namespace AE86Mod.Survivors.AE86
             //here is a basic skill def with all fields accounted for
             SkillDef secondarySkillDef1 = Skills.CreateSkillDef(new SkillDefInfo
             {
-                skillName = "AE86Gun",
-                skillNameToken = HENRY_PREFIX + "SECONDARY_GUN_NAME",
-                skillDescriptionToken = HENRY_PREFIX + "SECONDARY_GUN_DESCRIPTION",
+                skillName = "Ae86Gun",
+                skillNameToken = AE86_PREFIX + "SECONDARY_GUN_NAME",
+                skillDescriptionToken = AE86_PREFIX + "SECONDARY_GUN_DESCRIPTION",
                 keywordTokens = new string[] { "KEYWORD_AGILE" },
                 skillIcon = assetBundle.LoadAsset<Sprite>("texSecondaryIcon"),
 
@@ -282,9 +282,9 @@ namespace AE86Mod.Survivors.AE86
             //here's a skilldef of a typical movement skill.
             SkillDef utilitySkillDef1 = Skills.CreateSkillDef(new SkillDefInfo
             {
-                skillName = "AE86Roll",
-                skillNameToken = HENRY_PREFIX + "UTILITY_ROLL_NAME",
-                skillDescriptionToken = HENRY_PREFIX + "UTILITY_ROLL_DESCRIPTION",
+                skillName = "Ae86Roll",
+                skillNameToken = AE86_PREFIX + "UTILITY_ROLL_NAME",
+                skillDescriptionToken = AE86_PREFIX + "UTILITY_ROLL_DESCRIPTION",
                 skillIcon = assetBundle.LoadAsset<Sprite>("texUtilityIcon"),
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(Roll)),
@@ -320,9 +320,9 @@ namespace AE86Mod.Survivors.AE86
             //a basic skill. some fields are omitted and will just have default values
             SkillDef specialSkillDef1 = Skills.CreateSkillDef(new SkillDefInfo
             {
-                skillName = "AE86Bomb",
-                skillNameToken = HENRY_PREFIX + "SPECIAL_BOMB_NAME",
-                skillDescriptionToken = HENRY_PREFIX + "SPECIAL_BOMB_DESCRIPTION",
+                skillName = "Ae86Bomb",
+                skillNameToken = AE86_PREFIX + "SPECIAL_BOMB_NAME",
+                skillDescriptionToken = AE86_PREFIX + "SPECIAL_BOMB_DESCRIPTION",
                 skillIcon = assetBundle.LoadAsset<Sprite>("texSpecialIcon"),
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.ThrowBomb)),
@@ -362,9 +362,9 @@ namespace AE86Mod.Survivors.AE86
             //currently not needed as with only 1 skin they will simply take the default meshes
                 //uncomment this when you have another skin
             //defaultSkin.meshReplacements = Modules.Skins.getMeshReplacements(assetBundle, defaultRendererinfos,
-            //    "meshAE86Sword",
-            //    "meshAE86Gun",
-            //    "meshAE86");
+            //    "meshAe86Sword",
+            //    "meshAe86Gun",
+            //    "meshAe86");
 
             //add new skindef to our list of skindefs. this is what we'll be passing to the SkinController
             skins.Add(defaultSkin);
@@ -374,24 +374,24 @@ namespace AE86Mod.Survivors.AE86
             #region MasterySkin
             
             ////creating a new skindef as we did before
-            //SkinDef masterySkin = Modules.Skins.CreateSkinDef(HENRY_PREFIX + "MASTERY_SKIN_NAME",
+            //SkinDef masterySkin = Modules.Skins.CreateSkinDef(AE86_PREFIX + "MASTERY_SKIN_NAME",
             //    assetBundle.LoadAsset<Sprite>("texMasteryAchievement"),
             //    defaultRendererinfos,
             //    prefabCharacterModel.gameObject,
-            //    AE86Unlockables.masterySkinUnlockableDef);
+            //    Ae86Unlockables.masterySkinUnlockableDef);
 
             ////adding the mesh replacements as above. 
             ////if you don't want to replace the mesh (for example, you only want to replace the material), pass in null so the order is preserved
             //masterySkin.meshReplacements = Modules.Skins.getMeshReplacements(assetBundle, defaultRendererinfos,
-            //    "meshAE86SwordAlt",
+            //    "meshAe86SwordAlt",
             //    null,//no gun mesh replacement. use same gun mesh
-            //    "meshAE86Alt");
+            //    "meshAe86Alt");
 
             ////masterySkin has a new set of RendererInfos (based on default rendererinfos)
             ////you can simply access the RendererInfos' materials and set them to the new materials for your skin.
-            //masterySkin.rendererInfos[0].defaultMaterial = assetBundle.LoadMaterial("matAE86Alt");
-            //masterySkin.rendererInfos[1].defaultMaterial = assetBundle.LoadMaterial("matAE86Alt");
-            //masterySkin.rendererInfos[2].defaultMaterial = assetBundle.LoadMaterial("matAE86Alt");
+            //masterySkin.rendererInfos[0].defaultMaterial = assetBundle.LoadMaterial("matAe86Alt");
+            //masterySkin.rendererInfos[1].defaultMaterial = assetBundle.LoadMaterial("matAe86Alt");
+            //masterySkin.rendererInfos[2].defaultMaterial = assetBundle.LoadMaterial("matAe86Alt");
 
             ////here's a barebones example of using gameobjectactivations that could probably be streamlined or rewritten entirely, truthfully, but it works
             //masterySkin.gameObjectActivations = new SkinDef.GameObjectActivation[]
@@ -421,7 +421,7 @@ namespace AE86Mod.Survivors.AE86
             //Modules.Prefabs.CloneDopplegangerMaster(bodyPrefab, masterName, "Merc");
 
             //how to set up AI in code
-            AE86AI.Init(bodyPrefab, masterName);
+            Ae86AI.Init(bodyPrefab, masterName);
 
             //how to load a master set up in unity, can be an empty gameobject with just AISkillDriver components
             //assetBundle.LoadMaster(bodyPrefab, masterName);
@@ -435,7 +435,7 @@ namespace AE86Mod.Survivors.AE86
         private void RecalculateStatsAPI_GetStatCoefficients(CharacterBody sender, R2API.RecalculateStatsAPI.StatHookEventArgs args)
         {
 
-            if (sender.HasBuff(AE86Buffs.armorBuff))
+            if (sender.HasBuff(Ae86Buffs.armorBuff))
             {
                 args.armorAdd += 300;
             }

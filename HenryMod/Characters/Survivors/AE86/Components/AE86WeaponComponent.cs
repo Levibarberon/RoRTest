@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace AE86Mod.Survivors.AE86.Components
+namespace Ae86Mod.Survivors.Ae86.Components
 {
-    internal class AE86WeaponComponent : MonoBehaviour
+    internal class Ae86WeaponComponent : MonoBehaviour
     {
         private void Awake()
         {

@@ -1,7 +1,7 @@
 ﻿using RoR2;
 using RoR2.Achievements;
 
-namespace AE86Mod.Modules.Achievements
+namespace Ae86Mod.Modules.Achievements
 {
     public abstract class BaseMasteryAchievement : BaseAchievement
     {

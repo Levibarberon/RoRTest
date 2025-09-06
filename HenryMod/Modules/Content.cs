@@ -3,7 +3,7 @@ using RoR2.Skills;
 using System;
 using UnityEngine;
 
-namespace AE86Mod.Modules
+namespace Ae86Mod.Modules
 {
     //consolidate contentaddition here in case something breaks and/or want to move to r2api
     internal class Content

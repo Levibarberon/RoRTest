@@ -1,10 +1,10 @@
 ﻿using EntityStates;
-using AE86Mod.Survivors.AE86;
+using Ae86Mod.Survivors.Ae86;
 using RoR2;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace AE86Mod.Survivors.AE86.SkillStates
+namespace Ae86Mod.Survivors.Ae86.SkillStates
 {
     public class Roll : BaseSkillState
     {
@@ -12,7 +12,7 @@ namespace AE86Mod.Survivors.AE86.SkillStates
         public static float initialSpeedCoefficient = 5f;
         public static float finalSpeedCoefficient = 2.5f;
 
-        public static string dodgeSoundString = "AE86Roll";
+        public static string dodgeSoundString = "Ae86Roll";
         public static float dodgeFOV = global::EntityStates.Commando.DodgeState.dodgeFOV;
 
         private float rollSpeed;
@@ -52,7 +52,7 @@ namespace AE86Mod.Survivors.AE86.SkillStates
 
             if (NetworkServer.active)
             {
-                characterBody.AddTimedBuff(AE86Buffs.armorBuff, 3f * duration);
+                characterBody.AddTimedBuff(Ae86Buffs.armorBuff, 3f * duration);
                 characterBody.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, 0.5f * duration);
             }
         }

@@ -1,5 +1,5 @@
-﻿using AE86Mod.Modules;
-using AE86Mod.Modules.Characters;
+﻿using Ae86Mod.Modules;
+using Ae86Mod.Modules.Characters;
 using RoR2;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,9 +11,9 @@ using UnityEngine;
                     {localScale})
 */
 
-namespace AE86Mod.Survivors.AE86
+namespace Ae86Mod.Survivors.Ae86
 {
-    public class AE86ItemDisplays : ItemDisplaysBase
+    public class Ae86ItemDisplays : ItemDisplaysBase
     {
         protected override void SetItemDisplayRules(List<ItemDisplayRuleSet.KeyAssetRuleGroup> itemDisplayRules)
         {

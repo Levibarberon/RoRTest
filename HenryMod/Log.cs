@@ -2,7 +2,7 @@
 using System.Security;
 using System.Security.Permissions;
 
-namespace AE86Mod
+namespace Ae86Mod
 {
     internal static class Log
     {

@@ -1,9 +1,9 @@
 ﻿using BepInEx.Configuration;
-using AE86Mod.Modules;
+using Ae86Mod.Modules;
 
-namespace AE86Mod.Survivors.AE86
+namespace Ae86Mod.Survivors.Ae86
 {
-    public static class AE86Config
+    public static class Ae86Config
     {
         public static ConfigEntry<bool> someConfigBool;
         public static ConfigEntry<float> someConfigFloat;
@@ -11,7 +11,7 @@ namespace AE86Mod.Survivors.AE86
 
         public static void Init()
         {
-            string section = "AE86";
+            string section = "Ae86";
 
             someConfigBool = Config.BindAndOptions(
                 section,
