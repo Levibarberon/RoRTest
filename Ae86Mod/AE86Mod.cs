@@ -9,41 +9,24 @@ using System.Security.Permissions;
 [module: UnverifiableCode]
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]
 
-//rename this namespace
-namespace Ae86Mod
-{
+namespace Ae86Mod {
     //[BepInDependency("com.rune580.riskofoptions", BepInDependency.DependencyFlags.SoftDependency)]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
     [BepInPlugin(MODUID, MODNAME, MODVERSION)]
-    public class Ae86Plugin : BaseUnityPlugin
-    {
-        // if you do not change this, you are giving permission to deprecate the mod-
-        //  please change the names to your own stuff, thanks
-        //   this shouldn't even have to be said
+    public class Ae86Plugin : BaseUnityPlugin {
         public const string MODUID = "com.Test.Ae86Mod";
         public const string MODNAME = "Ae86Mod";
         public const string MODVERSION = "1.0.0";
-
-        // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
-        public const string DEVELOPER_PREFIX = "TEST";
+        public const string DEVELOPER_PREFIX = "TEST"; // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
 
         public static Ae86Plugin instance;
 
-        void Awake()
-        {
+        void Awake() {
             instance = this;
-
-            //easy to use logger
             Log.Init(Logger);
-
-            // used when you want to properly set up language folders
             Modules.Language.Init();
-
-            // character initialization
             new Ae86Survivor().Initialize();
-
-            // make a content pack and add it. this has to be last
-            new Modules.ContentPacks().Initialize();
+            new Modules.ContentPacks().Initialize(); // this has to be last
         }
     }
 }

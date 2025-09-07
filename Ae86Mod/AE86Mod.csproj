@@ -39,7 +39,8 @@
     <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(ProjectDir)..\Build\plugins" />
     <Copy SourceFiles="$(ProjectDir)..\Ae86UnityProject\AssetBundles\ae86"
       DestinationFolder="$(ProjectDir)..\Build\plugins\AssetBundles" />
-    <Exec Command="Xcopy /E /I /Y &quot;$(ProjectDir)..\Build\plugins\&quot; &quot;C:\Users\Lévi\AppData\Roaming\Thunderstore Mod Manager\DataFolder\RiskOfRain2\profiles\Default\BepInEx\plugins\ae86\&quot;" />
+    <Exec Command="echo Copying to $(ModManPath)\ae86\" />
+    <Exec Command="Xcopy /E /I /Y &quot;$(ProjectDir)..\Build\plugins\&quot; &quot;$(ModManPath)\ae86\&quot;" />
   </Target>
 
 </Project>

@@ -9,63 +9,49 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Ae86Mod.Survivors.Ae86
-{
-    public class Ae86Survivor : SurvivorBase<Ae86Survivor>
-    {
-        //used to load the assetbundle for this character. must be unique
-        public override string assetBundleName => "ae86"; //if you do not change this, you are giving permission to deprecate the mod
+namespace Ae86Mod.Survivors.Ae86 {
+    public class Ae86Survivor : SurvivorBase<Ae86Survivor> {
 
-        //the name of the prefab we will create. conventionally ending in "Body". must be unique
-        public override string bodyName => "Ae86Body"; //if you do not change this, you get the point by now
+        public override string assetBundleName => "ae86"; // used to load the assetbundle for this character
+        public override string bodyName => "Ae86Body"; // the name of the prefab created, conventionally ending in "Body"
+        public override string masterName => "Ae86MonsterMaster"; // name of the ai master for vengeance and goobo
 
-        //name of the ai master for vengeance and goobo. must be unique
-        public override string masterName => "Ae86MonsterMaster"; //if you do not
-
-        //the names of the prefabs you set up in unity that we will use to build your character
+        // unity prefabs used to build the character
         public override string modelPrefabName => "mdlAe86";
         public override string displayPrefabName => "Ae86Display";
 
         public const string AE86_PREFIX = Ae86Plugin.DEVELOPER_PREFIX + "_AE86_";
-
-        //used when registering your survivor's language tokens
-        public override string survivorTokenPrefix => AE86_PREFIX;
+        public override string survivorTokenPrefix => AE86_PREFIX; // used when registering language tokens
         
-        public override BodyInfo bodyInfo => new BodyInfo
-        {
+        public override BodyInfo bodyInfo => new BodyInfo {
             bodyName = bodyName,
             bodyNameToken = AE86_PREFIX + "NAME",
             subtitleNameToken = AE86_PREFIX + "SUBTITLE",
 
-            characterPortrait = assetBundle.LoadAsset<Texture>("texHenryIcon"),
-            bodyColor = Color.white,
-            sortPosition = 100,
+            characterPortrait = assetBundle.LoadAsset<Texture>("texAE86Icon"),
+            bodyColor = Color.green,
+            sortPosition = -999999f,
 
             crosshair = Asset.LoadCrosshair("Standard"),
             podPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod"),
 
-            maxHealth = 110f,
-            healthRegen = 1.5f,
+            maxHealth = 1100f,
+            healthRegen = 100.5f,
             armor = 0f,
-
-            jumpCount = 1,
+            jumpCount = 10,
         };
 
-        public override CustomRendererInfo[] customRendererInfos => new CustomRendererInfo[]
-        {
-                new CustomRendererInfo
-                {
-                    childName = "SwordModel",
-                    material = assetBundle.LoadMaterial("matHenry"),
-                },
-                new CustomRendererInfo
-                {
-                    childName = "GunModel",
-                },
-                new CustomRendererInfo
-                {
-                    childName = "Model",
-                }
+        public override CustomRendererInfo[] customRendererInfos => new CustomRendererInfo[] {
+            new CustomRendererInfo {
+                childName = "SwordModel",
+                material = assetBundle.LoadMaterial("matHenry"),
+            },
+            new CustomRendererInfo {
+                childName = "GunModel",
+            },
+            new CustomRendererInfo {
+                childName = "Model",
+            }
         };
 
         public override UnlockableDef characterUnlockableDef => Ae86Unlockables.characterUnlockableDef;
@@ -81,19 +67,14 @@ namespace Ae86Mod.Survivors.Ae86
         public override CharacterModel prefabCharacterModel { get; protected set; }
         public override GameObject displayPrefab { get; protected set; }
 
-        public override void Initialize()
-        {
-            //uncomment if you have multiple characters
-            //ConfigEntry<bool> characterEnabled = Config.CharacterEnableConfig("Survivors", "Ae86");
-
-            //if (!characterEnabled.Value)
-            //    return;
-
+        public override void Initialize() {
+            // uncomment if you have multiple characters
+            // ConfigEntry<bool> characterEnabled = Config.CharacterEnableConfig("Survivors", "Ae86");
+            // if (!characterEnabled.Value) return;
             base.Initialize();
         }
 
-        public override void InitializeCharacter()
-        {
+        public override void InitializeCharacter() {
             //need the character unlockable before you initialize the survivordef
             Ae86Unlockables.Init();
 
@@ -116,22 +97,19 @@ namespace Ae86Mod.Survivors.Ae86
             AddHooks();
         }
 
-        private void AdditionalBodySetup()
-        {
+        private void AdditionalBodySetup() {
             AddHitboxes();
             bodyPrefab.AddComponent<Ae86WeaponComponent>();
             //bodyPrefab.AddComponent<HuntressTrackerComopnent>();
             //anything else here
         }
 
-        public void AddHitboxes()
-        {
+        public void AddHitboxes() {
             //example of how to create a HitBoxGroup. see summary for more details
             Prefabs.SetupHitBoxGroup(characterModelObject, "SwordGroup", "SwordHitbox");
         }
 
-        public override void InitializeEntityStateMachines() 
-        {
+        public override void InitializeEntityStateMachines() {
             //clear existing state machines from your cloned body (probably commando)
             //omit all this if you want to just keep theirs
             Prefabs.ClearEntityStateMachines(bodyPrefab);
@@ -146,8 +124,7 @@ namespace Ae86Mod.Survivors.Ae86
         }
 
         #region skills
-        public override void InitializeSkills()
-        {
+        public override void InitializeSkills() {
             //remove the genericskills from the commando body we cloned
             Skills.ClearGenericSkills(bodyPrefab);
             //add our own
@@ -160,11 +137,9 @@ namespace Ae86Mod.Survivors.Ae86
 
         //skip if you don't have a passive
         //also skip if this is your first look at skills
-        private void AddPassiveSkill()
-        {
+        private void AddPassiveSkill() {
             //option 1. fake passive icon just to describe functionality we will implement elsewhere
-            bodyPrefab.GetComponent<SkillLocator>().passiveSkill = new SkillLocator.PassiveSkill
-            {
+            bodyPrefab.GetComponent<SkillLocator>().passiveSkill = new SkillLocator.PassiveSkill {
                 enabled = true,
                 skillNameToken = AE86_PREFIX + "PASSIVE_NAME",
                 skillDescriptionToken = AE86_PREFIX + "PASSIVE_DESCRIPTION",
@@ -174,8 +149,7 @@ namespace Ae86Mod.Survivors.Ae86
 
             //option 2. a new SkillFamily for a passive, used if you want multiple selectable passives
             GenericSkill passiveGenericSkill = Skills.CreateGenericSkillWithSkillFamily(bodyPrefab, "PassiveSkill");
-            SkillDef passiveSkillDef1 = Skills.CreateSkillDef(new SkillDefInfo
-            {
+            SkillDef passiveSkillDef1 = Skills.CreateSkillDef(new SkillDefInfo {
                 skillName = "Ae86Passive",
                 skillNameToken = AE86_PREFIX + "PASSIVE_NAME",
                 skillDescriptionToken = AE86_PREFIX + "PASSIVE_DESCRIPTION",
@@ -212,14 +186,12 @@ namespace Ae86Mod.Survivors.Ae86
         }
 
         //if this is your first look at skilldef creation, take a look at Secondary first
-        private void AddPrimarySkills()
-        {
+        private void AddPrimarySkills() {
             Skills.CreateGenericSkillWithSkillFamily(bodyPrefab, SkillSlot.Primary);
 
             //the primary skill is created using a constructor for a typical primary
             //it is also a SteppedSkillDef. Custom Skilldefs are very useful for custom behaviors related to casting a skill. see ror2's different skilldefs for reference
-            SteppedSkillDef primarySkillDef1 = Skills.CreateSkillDef<SteppedSkillDef>(new SkillDefInfo
-                (
+            SteppedSkillDef primarySkillDef1 = Skills.CreateSkillDef<SteppedSkillDef>(new SkillDefInfo(
                     "Ae86Slash",
                     AE86_PREFIX + "PRIMARY_SLASH_NAME",
                     AE86_PREFIX + "PRIMARY_SLASH_DESCRIPTION",
@@ -235,13 +207,11 @@ namespace Ae86Mod.Survivors.Ae86
             Skills.AddPrimarySkills(bodyPrefab, primarySkillDef1);
         }
 
-        private void AddSecondarySkills()
-        {
+        private void AddSecondarySkills() {
             Skills.CreateGenericSkillWithSkillFamily(bodyPrefab, SkillSlot.Secondary);
 
             //here is a basic skill def with all fields accounted for
-            SkillDef secondarySkillDef1 = Skills.CreateSkillDef(new SkillDefInfo
-            {
+            SkillDef secondarySkillDef1 = Skills.CreateSkillDef(new SkillDefInfo {
                 skillName = "Ae86Gun",
                 skillNameToken = AE86_PREFIX + "SECONDARY_GUN_NAME",
                 skillDescriptionToken = AE86_PREFIX + "SECONDARY_GUN_DESCRIPTION",
@@ -275,13 +245,11 @@ namespace Ae86Mod.Survivors.Ae86
             Skills.AddSecondarySkills(bodyPrefab, secondarySkillDef1);
         }
 
-        private void AddUtiitySkills()
-        {
+        private void AddUtiitySkills() {
             Skills.CreateGenericSkillWithSkillFamily(bodyPrefab, SkillSlot.Utility);
 
             //here's a skilldef of a typical movement skill.
-            SkillDef utilitySkillDef1 = Skills.CreateSkillDef(new SkillDefInfo
-            {
+            SkillDef utilitySkillDef1 = Skills.CreateSkillDef(new SkillDefInfo {
                 skillName = "Ae86Roll",
                 skillNameToken = AE86_PREFIX + "UTILITY_ROLL_NAME",
                 skillDescriptionToken = AE86_PREFIX + "UTILITY_ROLL_DESCRIPTION",
@@ -313,13 +281,11 @@ namespace Ae86Mod.Survivors.Ae86
             Skills.AddUtilitySkills(bodyPrefab, utilitySkillDef1);
         }
 
-        private void AddSpecialSkills()
-        {
+        private void AddSpecialSkills() {
             Skills.CreateGenericSkillWithSkillFamily(bodyPrefab, SkillSlot.Special);
 
             //a basic skill. some fields are omitted and will just have default values
-            SkillDef specialSkillDef1 = Skills.CreateSkillDef(new SkillDefInfo
-            {
+            SkillDef specialSkillDef1 = Skills.CreateSkillDef(new SkillDefInfo {
                 skillName = "Ae86Bomb",
                 skillNameToken = AE86_PREFIX + "SPECIAL_BOMB_NAME",
                 skillDescriptionToken = AE86_PREFIX + "SPECIAL_BOMB_DESCRIPTION",
@@ -341,8 +307,7 @@ namespace Ae86Mod.Survivors.Ae86
         #endregion skills
         
         #region skins
-        public override void InitializeSkins()
-        {
+        public override void InitializeSkins() {
             ModelSkinController skinController = prefabCharacterModel.gameObject.AddComponent<ModelSkinController>();
             ChildLocator childLocator = prefabCharacterModel.GetComponent<ChildLocator>();
 
@@ -413,8 +378,7 @@ namespace Ae86Mod.Survivors.Ae86
         #endregion skins
 
         //Character Master is what governs the AI of your character when it is not controlled by a player (artifact of vengeance, goobo)
-        public override void InitializeCharacterMaster()
-        {
+        public override void InitializeCharacterMaster() {
             //you must only do one of these. adding duplicate masters breaks the game.
 
             //if you're lazy or prototyping you can simply copy the AI of a different character to be used
@@ -427,16 +391,12 @@ namespace Ae86Mod.Survivors.Ae86
             //assetBundle.LoadMaster(bodyPrefab, masterName);
         }
 
-        private void AddHooks()
-        {
+        private void AddHooks() {
             R2API.RecalculateStatsAPI.GetStatCoefficients += RecalculateStatsAPI_GetStatCoefficients;
         }
 
-        private void RecalculateStatsAPI_GetStatCoefficients(CharacterBody sender, R2API.RecalculateStatsAPI.StatHookEventArgs args)
-        {
-
-            if (sender.HasBuff(Ae86Buffs.armorBuff))
-            {
+        private void RecalculateStatsAPI_GetStatCoefficients(CharacterBody sender, R2API.RecalculateStatsAPI.StatHookEventArgs args) {
+            if (sender.HasBuff(Ae86Buffs.armorBuff)) {
                 args.armorAdd += 300;
             }
         }

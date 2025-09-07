@@ -1,0 +1,5 @@
+<Project>
+  <PropertyGroup>
+    <ModManPath>...\RiskOfRain2\profiles\Default\BepInEx\plugins</ModManPath>
+  </PropertyGroup>
+</Project>
