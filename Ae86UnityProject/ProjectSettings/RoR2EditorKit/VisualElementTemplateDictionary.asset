@@ -12,6 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e07a0d3cddb5b9540aa1930563eb8d7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _serializedDictionary:
-  - k_templateName: R2EKSettings
-  - k_templateName: ExtendedHelpBox
+  _serializedDictionary: []
